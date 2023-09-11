@@ -23,14 +23,20 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
     [x] Add todo
     [x] Add Tasks
     [x] Scheduling Conflict message
+    [x] Update Todo
+    [x] Update Tasks ( mark complete, or not completed)
+    [x] Delete Task
+    [x] Render List of Todos with Tasks
 
 ### Pending Features
 
-    [ ] Update Todo
-    [ ] Update Tasks ( mark complete, or not completed)
     [ ] Delete Todo
-    [ ] Delete Task
+    [ ] Delete Task from card layout
+    [ ] Save todos to localstorage
     [ ] Authentication Page
+    [ ] Hook up auth with session storage
+    [ ] Beautify the application
+    [ ] Deploy on Github Pages
 
 ## Future Upgrades
 

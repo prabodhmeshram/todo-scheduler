@@ -43,7 +43,11 @@ export default function TodoCard(props) {
             <Checkbox
               key={task.id}
               id="ripple-on"
-              label={task.text}
+              label={
+                <span className={`${task.isCompleted ? "line-through" : ""} `}>
+                  {task.text}
+                </span>
+              }
               checked={task.isCompleted}
               ripple={true}
               onChange={(ev) => checkWhatChanged(task.id, !task.isCompleted)}
