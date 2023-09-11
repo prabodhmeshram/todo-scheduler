@@ -19,7 +19,7 @@ export default function TodoContainer() {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-row  todo-container">{todoList}</div>
+      <div className="flex flex-row todo-container">{todoList}</div>
       <AddTodoModal></AddTodoModal>
     </div>
   );

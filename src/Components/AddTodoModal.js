@@ -8,6 +8,7 @@ import {
   Select,
   Option,
   Input,
+  Alert,
 } from "@material-tailwind/react";
 import {
   addTodo,
@@ -20,7 +21,12 @@ import {
 } from "../store/todos";
 import { useDispatch, useSelector } from "react-redux";
 import { generateSlots } from "../utils/slots";
-import { checkIfTodoSlotAvailable, generateId } from "../utils/todos";
+import {
+  checkIfEndDateLessThanOrEqualToStartDate,
+  checkIfTodoSlotAvailable,
+  generateId,
+  getTaskObj,
+} from "../utils/todos";
 
 export function AddTodoModal(props) {
   const open = useSelector(selectModalState);
@@ -30,29 +36,27 @@ export function AddTodoModal(props) {
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (editTodoId !== "") {
       const editTodo = existingTodos.find((todo) => todo.id === editTodoId);
-      const { title, startTime, endTime } = editTodo;
+      const { title, startTime, endTime, tasks } = editTodo;
       setTitle(title);
       setStartTime(startTime);
       setEndTime(endTime);
+      setTasks(tasks);
     }
   }, [editTodoId]);
 
-  const inputObj = {
-    text: "",
-  };
-  const [tasks, setTasks] = useState([inputObj]);
+  const [tasks, setTasks] = useState([getTaskObj()]);
   const addEntryClick = () => {
-    setTasks((oldArray) => [...oldArray, inputObj]);
+    setTasks((oldArray) => [...oldArray, getTaskObj()]);
   };
 
   const deleteInput = (index) => {
     setTasks((arr) => {
-      arr.splice(index, 1);
-      return [...arr];
+      return arr.filter((ele, i) => i !== index);
     });
   };
 
@@ -65,27 +69,54 @@ export function AddTodoModal(props) {
   };
 
   const handleSave = () => {
-    const unableToAdd = checkIfTodoSlotAvailable(
+    const conflict = checkIfTodoSlotAvailable(
       startTime,
       endTime,
       existingTodos,
       editTodoId
     );
-    if (unableToAdd) {
-      console.log("Conflict Found", unableToAdd);
-    } else {
-      if (editTodoId !== "") {
-        dispatch(
-          updateTodo({ title, startTime, endTime, tasks, id: editTodoId })
-        );
-      } else {
-        dispatch(
-          addTodo({ title, startTime, endTime, tasks, id: generateId() })
-        );
-      }
-      resetState();
-      dispatch(openModal({ open: false }));
+    if (conflict) {
+      setErrorMessage(
+        "This schedule conflicts with another, please select different slot!"
+      );
+      return;
     }
+
+    const isStartGreaterOrEqualToEnd = checkIfEndDateLessThanOrEqualToStartDate(
+      startTime,
+      endTime
+    );
+
+    if (isStartGreaterOrEqualToEnd) {
+      setErrorMessage(
+        "Please select end time at least 30 minutes later than start time"
+      );
+      return;
+    }
+
+    if (editTodoId !== "") {
+      dispatch(
+        updateTodo({
+          title,
+          startTime,
+          endTime,
+          tasks: tasks.filter((task) => task.text !== ""),
+          id: editTodoId,
+        })
+      );
+    } else {
+      dispatch(
+        addTodo({
+          title,
+          startTime,
+          endTime,
+          tasks: tasks.filter((task) => task.text !== ""),
+          id: generateId("todo"),
+        })
+      );
+    }
+    resetState();
+    dispatch(openModal({ open: false }));
   };
 
   const handleClose = () => {
@@ -95,10 +126,11 @@ export function AddTodoModal(props) {
 
   // Resetting the state to old values
   const resetState = () => {
-    setTasks([inputObj]);
+    setTasks([getTaskObj()]);
     setTitle("");
     setStartTime("");
     setEndTime("");
+    setErrorMessage("");
     dispatch(setEditTodo({ id: "" }));
   };
 
@@ -146,7 +178,14 @@ export function AddTodoModal(props) {
               </div>
             ))}
           </div>
-          <Button onClick={addEntryClick}>Add More</Button>
+          {errorMessage !== "" && (
+            <Alert Alert color="red" className="mt-6">
+              {errorMessage}
+            </Alert>
+          )}
+          <Button onClick={addEntryClick} className="mt-6">
+            Add More
+          </Button>
         </DialogBody>
         <DialogFooter>
           <Button

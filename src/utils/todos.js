@@ -31,12 +31,34 @@ function checkIfTodoSlotAvailable(startTime, endTime, existingTodos, skipId) {
 
     // Condition that tells if there is conflict
     // Either the schedule overlap from start or from behind
-    return (c1s < c2s && c1e > c2s) || (c1s > c2s && c1s < c2e);
+    return (
+      (c1s < c2s && c1e > c2s) ||
+      (c1s > c2s && c1s < c2e) ||
+      (c1s <= c2s && c1e >= c2e)
+    );
   });
 }
 
-function generateId() {
-  return "id" + Math.random().toString(16).slice(2);
+function getTaskObj() {
+  return {
+    text: "",
+    isCompleted: false,
+    id: generateId("task"),
+  };
 }
 
-export { mapTodosToSlots, checkIfTodoSlotAvailable, generateId };
+function generateId(appendText) {
+  return `${appendText}-${Math.random().toString(16).slice(2)}`;
+}
+
+function checkIfEndDateLessThanOrEqualToStartDate(startTime, endTime) {
+  return dayjs(startTime) >= dayjs(endTime);
+}
+
+export {
+  mapTodosToSlots,
+  checkIfTodoSlotAvailable,
+  generateId,
+  checkIfEndDateLessThanOrEqualToStartDate,
+  getTaskObj,
+};
