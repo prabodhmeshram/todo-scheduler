@@ -1,13 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Header Css */
+
+/* Footer Css */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Main content css */
+
+.todo-container {
+  /* keeping it fix */
+  width: 1600px;
+}
+
+.todo-slot {
+  border: 1px solid rgb(220, 217, 217);
+  height: 300px;
+  /* this is to keep each slot of equal size  */
+  flex-basis: 6.25% !important;
+}
+
+.todo-item {
+  border: 1px solid red;
+  height: 280px;
+  margin: 6px 3px 0px 0px;
+  border-radius: 4px;
+  background-color: teal;
+  position: absolute;
+}
+
+.add-todo-container {
+}
+
+/* .add-todo {
+  font-size: 36px;
+} */
