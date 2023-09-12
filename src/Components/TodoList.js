@@ -7,7 +7,7 @@ export default function TodoList() {
   const todos = useSelector(selectTodo);
 
   return (
-    <div className="mt-8 flex">
+    <div className="my-8 flex">
       {todos.map((todo) => (
         <TodoCard key={todo.id} todo={todo}></TodoCard>
       ))}

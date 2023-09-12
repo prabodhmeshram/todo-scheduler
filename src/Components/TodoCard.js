@@ -42,7 +42,6 @@ export default function TodoCard(props) {
           {tasks.map((task) => (
             <Checkbox
               key={task.id}
-              id="ripple-on"
               label={
                 <span className={`${task.isCompleted ? "line-through" : ""} `}>
                   {task.text}
