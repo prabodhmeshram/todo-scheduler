@@ -3,9 +3,11 @@ import "./App.css";
 import Dashboard from "./Pages/Dashboard";
 import { selectLogin } from "./store/auth";
 import LoginPage from "./Pages/LoginPage";
+import { isUserLoggedIn } from "./utils/auth";
 
 function App() {
-  const isLoggedIn = useSelector(selectLogin);
+  let isLoggedIn = useSelector(selectLogin);
+  isLoggedIn = isLoggedIn || isUserLoggedIn();
 
   return (
     <div className="App">

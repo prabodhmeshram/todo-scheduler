@@ -7,7 +7,12 @@ export const authSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      state.value = action.payload.isLoggedIn;
+      sessionStorage.setItem("logged-in-user", action.payload.user);
+      state.value = true;
+    },
+    logout: (state) => {
+      sessionStorage.removeItem("logged-in-user");
+      state.value = false;
     },
   },
 });
