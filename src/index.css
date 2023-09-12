@@ -56,3 +56,8 @@ footer {
   background-color: teal;
   position: absolute;
 }
+
+.no-todos {
+  width: 100%;
+  font-size: 30px;
+}
