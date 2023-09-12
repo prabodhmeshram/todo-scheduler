@@ -1,14 +1,15 @@
 import React from "react";
 import {
+  Button,
   Card,
   CardBody,
-  CardHeader,
+  CardFooter,
   Checkbox,
   Typography,
 } from "@material-tailwind/react";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutline } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { updateTodo } from "../store/todos";
+import { deleteTodo, updateTodo } from "../store/todos";
 
 export default function TodoCard(props) {
   const { todo } = props;
@@ -34,43 +35,51 @@ export default function TodoCard(props) {
     dispatch(updateTodo({ ...todo, tasks: remainingTasks }));
   };
 
+  const onDeleteTodo = (id) => {
+    dispatch(deleteTodo({ id }));
+  };
+
   return (
     <Card className="mt-6 w-96">
-      <CardHeader
-        variant="gradient"
-        color="blue"
-        className="mb-4 grid h-16 place-items-center"
-      >
-        <Typography variant="h3" color="white">
+      <CardBody>
+        <Typography variant="h5" color="blue-gray" className="mb-2 bg-blue-500">
           {title}
         </Typography>
-      </CardHeader>
-      <CardBody>
         <div className="flex flex-col items-start">
           {tasks.map((task) => (
             <div key={task.id}>
-              <Checkbox
-                label={
-                  <span
-                    className={`${task.isCompleted ? "line-through" : ""} `}
-                  >
-                    {task.text}
-                  </span>
-                }
-                checked={task.isCompleted}
-                ripple={true}
-                onChange={(ev) => updateTaskState(task.id, !task.isCompleted)}
-              />
-              <div className="ml-10 inline">
-                <DeleteIcon
+              <div className="ml-10">
+                <Checkbox
+                  label={
+                    <span
+                      className={`${task.isCompleted ? "line-through" : ""} `}
+                    >
+                      {task.text}
+                    </span>
+                  }
+                  checked={task.isCompleted}
+                  ripple={true}
+                  onChange={() => updateTaskState(task.id, !task.isCompleted)}
+                />
+                <DeleteOutline
                   onClick={() => deleteTask(task.id)}
                   color="error"
-                ></DeleteIcon>
+                ></DeleteOutline>
               </div>
             </div>
           ))}
         </div>
       </CardBody>
+      <CardFooter className="pt-0">
+        <Button
+          onClick={() => onDeleteTodo(todo.id)}
+          color="red"
+          variant="gradient"
+          fullWidth
+        >
+          Delete
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

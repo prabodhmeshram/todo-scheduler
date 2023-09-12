@@ -27,10 +27,13 @@ export const todosSlice = createSlice({
         return todo;
       });
     },
+    deleteTodo: (state, action) => {
+      state.value = state.value.filter((todo) => todo.id !== action.payload.id);
+    },
   },
 });
 
-export const { addTodo, openModal, setEditTodo, updateTodo } =
+export const { addTodo, openModal, setEditTodo, updateTodo, deleteTodo } =
   todosSlice.actions;
 
 // selectors for todo specific values
