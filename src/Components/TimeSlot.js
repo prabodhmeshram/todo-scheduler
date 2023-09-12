@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, openModal, setEditTodo } from "../store/todos";
 import { Delete, Edit } from "@mui/icons-material";
+import { getTimeSlotString } from "../utils/todos";
 
 export default function TimeSlot(props) {
   const { slot } = props;
@@ -26,6 +27,7 @@ export default function TimeSlot(props) {
     todoElement = (
       <div style={{ width: `${width}px` }} className="todo-item">
         <div className="p-5">{truncateTitle(slot.todo.title)}</div>
+        <div>{getTimeSlotString(slot.todo.startTime, slot.todo.endTime)}</div>
         <div>
           Number of tasks <strong>{slot.todo.tasks.length}</strong>
         </div>

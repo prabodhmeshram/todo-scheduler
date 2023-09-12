@@ -41,6 +41,8 @@ footer {
   width: 1600px;
 }
 
+/*  */
+
 .todo-slot {
   border: 1px solid rgb(220, 217, 217);
   height: 300px;
@@ -51,9 +53,10 @@ footer {
 .todo-item {
   border: 1px solid red;
   height: 280px;
+  color: #fff;
   margin: 6px 3px 0px 0px;
   border-radius: 4px;
-  background-color: teal;
+  background-color: rgb(230, 124, 115);
   position: absolute;
 }
 

@@ -55,10 +55,17 @@ function checkIfEndDateLessThanOrEqualToStartDate(startTime, endTime) {
   return dayjs(startTime) >= dayjs(endTime);
 }
 
+function getTimeSlotString(startTime, endTime) {
+  return `${dayjs(startTime).format("HH:mm")}-${dayjs(endTime).format(
+    "HH:mmA"
+  )}`;
+}
+
 export {
   mapTodosToSlots,
   checkIfTodoSlotAvailable,
   generateId,
   checkIfEndDateLessThanOrEqualToStartDate,
   getTaskObj,
+  getTimeSlotString,
 };

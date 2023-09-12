@@ -47,7 +47,7 @@ export function AddTodoModal(props) {
       setEndTime(endTime);
       setTasks(tasks);
     }
-  }, [editTodoId]);
+  }, [editTodoId, existingTodos]);
 
   const [tasks, setTasks] = useState([getTaskObj()]);
   const addEntryClick = () => {
