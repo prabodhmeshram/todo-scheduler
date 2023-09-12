@@ -41,3 +41,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## Future Upgrades
 
     [ ] Integration with Calendar App to add events
+    [ ] Extend Scheduler to multiple days
