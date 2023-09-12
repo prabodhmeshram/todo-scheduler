@@ -22,7 +22,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { generateSlots } from "../utils/slots";
 import {
-  checkIfEndDateLessThanOrEqualToStartDate,
+  checkIfStartTimeAheadOfEndTime,
   checkIfTodoSlotAvailable,
   generateId,
   getTaskObj,
@@ -33,9 +33,13 @@ export function AddTodoModal(props) {
   const existingTodos = useSelector(selectTodo);
   const editTodoId = useSelector(selectEditTodo);
 
+  const slots = generateSlots();
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [tasks, setTasks] = useState([getTaskObj()]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -49,8 +53,7 @@ export function AddTodoModal(props) {
     }
   }, [editTodoId, existingTodos]);
 
-  const [tasks, setTasks] = useState([getTaskObj()]);
-  const addEntryClick = () => {
+  const addMoreTasks = () => {
     setTasks((oldArray) => [...oldArray, getTaskObj()]);
   };
 
@@ -82,12 +85,12 @@ export function AddTodoModal(props) {
       return;
     }
 
-    const isStartGreaterOrEqualToEnd = checkIfEndDateLessThanOrEqualToStartDate(
+    const hasInvalidEventRange = checkIfStartTimeAheadOfEndTime(
       startTime,
       endTime
     );
 
-    if (isStartGreaterOrEqualToEnd) {
+    if (hasInvalidEventRange) {
       setErrorMessage(
         "Please select end time at least 30 minutes later than start time"
       );
@@ -125,6 +128,7 @@ export function AddTodoModal(props) {
   };
 
   // Resetting the state to old values
+  // this is required when popup is reopened
   const resetState = () => {
     setTasks([getTaskObj()]);
     setTitle("");
@@ -133,9 +137,6 @@ export function AddTodoModal(props) {
     setErrorMessage("");
     dispatch(setEditTodo({ id: "" }));
   };
-
-  const slots = generateSlots();
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -199,7 +200,7 @@ export function AddTodoModal(props) {
               {errorMessage}
             </Alert>
           )}
-          <Button color="blue" onClick={addEntryClick} className="mt-6">
+          <Button color="blue" onClick={addMoreTasks} className="mt-6">
             Add More
           </Button>
         </DialogBody>

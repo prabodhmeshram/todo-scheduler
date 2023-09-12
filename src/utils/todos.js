@@ -51,7 +51,7 @@ function generateId(appendText) {
   return `${appendText}-${Math.random().toString(16).slice(2)}`;
 }
 
-function checkIfEndDateLessThanOrEqualToStartDate(startTime, endTime) {
+function checkIfStartTimeAheadOfEndTime(startTime, endTime) {
   return dayjs(startTime) >= dayjs(endTime);
 }
 
@@ -76,7 +76,7 @@ export {
   mapTodosToSlots,
   checkIfTodoSlotAvailable,
   generateId,
-  checkIfEndDateLessThanOrEqualToStartDate,
+  checkIfStartTimeAheadOfEndTime,
   getTaskObj,
   getTimeSlotString,
   getHour,
