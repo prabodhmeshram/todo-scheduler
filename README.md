@@ -27,11 +27,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
     [x] Update Tasks ( mark complete, or not completed)
     [x] Delete Task
     [x] Render List of Todos with Tasks
+    [x] Delete Task from card layout
 
 ### Pending Features
 
     [ ] Delete Todo
-    [ ] Delete Task from card layout
     [ ] Save todos to localstorage
     [ ] Authentication Page
     [ ] Hook up auth with session storage
