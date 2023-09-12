@@ -29,13 +29,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
     [x] Render List of Todos with Tasks
     [x] Delete Task from card layout
     [x] Delete Todo
+    [x] Authentication Page
+    [x] Hook up auth with session storage
+    [x] Beautify the application
 
 ### Pending Features
 
     [ ] Save todos to localstorage
-    [ ] Authentication Page
-    [ ] Hook up auth with session storage
-    [ ] Beautify the application
     [ ] Deploy on Github Pages
 
 ## Future Upgrades
