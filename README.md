@@ -11,7 +11,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## Dependencies
 
 - React
-- Router ( Do we need this ????)
+- Redux Toolkit
 - Tailwind CSS with Material Design
 - DayJS
 
