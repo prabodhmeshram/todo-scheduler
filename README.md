@@ -33,12 +33,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
     [x] Hook up auth with session storage
     [x] Beautify the application
 
-### Pending Features
-
-    [ ] Save todos to localstorage
-    [ ] Deploy on Github Pages
-
 ## Future Upgrades
 
     [ ] Integration with Calendar App to add events
     [ ] Extend Scheduler to multiple days
+    [ ] Persistence of todos in DB
