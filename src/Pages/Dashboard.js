@@ -36,13 +36,13 @@ export default function Dashboard() {
           <div className="text-3xl text-left ml-10"> {today}</div>
           <div className="flex gap-10 item-center justify-center">
             <Badge content={numberOfTodos}>
-              <Button>Todos</Button>
+              <Button color="blue">Todos</Button>
             </Badge>
             <Badge content={pendingTasks}>
-              <Button>Pending Tasks</Button>
+              <Button color="orange">Pending Tasks</Button>
             </Badge>
             <Badge content={completedTasks}>
-              <Button>Completed Tasks</Button>
+              <Button color="green">Completed Tasks</Button>
             </Badge>
           </div>
           <AddTodo></AddTodo>

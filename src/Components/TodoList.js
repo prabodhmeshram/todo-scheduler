@@ -16,7 +16,7 @@ export default function TodoList() {
         ))
       ) : (
         <div className="no-todos mt-16">
-          Add some todos, nothing to show right now
+          Add some todos, nothing to show right now 😀
         </div>
       )}
     </div>
