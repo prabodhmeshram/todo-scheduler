@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, openModal, setEditTodo } from "../store/todos";
 import { Delete, Edit } from "@mui/icons-material";
-import { getTimeSlotString } from "../utils/todos";
+import { getHour, getTimeSlotString } from "../utils/todos";
 
 export default function TimeSlot(props) {
   const { slot } = props;
@@ -18,35 +18,50 @@ export default function TimeSlot(props) {
   };
 
   const truncateTitle = (title) => {
-    return title.substring(0, 20) + "...";
+    return title.length <= 20 ? title : title.substring(0, 20) + "...";
   };
+
+  const slotTime = (
+    <div className="-mt-6 text-sm text-left text-gray-500">
+      {getHour(slot.startTime)}
+    </div>
+  );
 
   let todoElement = "";
   if (slot.todo) {
     const { width } = slot.todo;
+
     todoElement = (
-      <div style={{ width: `${width}px` }} className="todo-item">
-        <div className="p-5">{truncateTitle(slot.todo.title)}</div>
-        <div>{getTimeSlotString(slot.todo.startTime, slot.todo.endTime)}</div>
-        <div>
-          Number of tasks <strong>{slot.todo.tasks.length}</strong>
-        </div>
-        <div className="mr-5 cursor-pointer mt-5">
-          <div className="my-3">
+      <>
+        {slotTime}
+        <div
+          style={{ width: `${width}px` }}
+          className="todo-item flex flex-col justify-start text-sm"
+        >
+          <div className="mb-5 mt-2 text-lg">
+            {truncateTitle(slot.todo.title)}
+          </div>
+          <div>{getTimeSlotString(slot.todo.startTime, slot.todo.endTime)}</div>
+          <div className="my-4">
+            Number of tasks <strong>{slot.todo.tasks.length}</strong>
+          </div>
+          <div className="ml-5 mt-5 my-3 flex flex-row gap-5">
             <Edit
               onClick={() => onEditTodo(slot.todo.id)}
               fontSize="medium"
+              className="cursor-pointer"
             ></Edit>
-          </div>
-          <div className="my-3">
             <Delete
               onClick={() => onDeleteTodo(slot.todo.id)}
               fontSize="medium"
+              className="cursor-pointer"
             ></Delete>
           </div>
         </div>
-      </div>
+      </>
     );
+  } else {
+    todoElement = <>{slotTime}</>;
   }
 
   return (

@@ -7,9 +7,13 @@ export default function TodoList() {
   const todos = useSelector(selectTodo);
 
   return (
-    <div className="my-8 flex items-center">
+    <div className="my-14 flex flex-row justify-items-start">
       {todos.length > 0 ? (
-        todos.map((todo) => <TodoCard key={todo.id} todo={todo}></TodoCard>)
+        todos.map((todo) => (
+          <div>
+            <TodoCard key={todo.id} todo={todo}></TodoCard>
+          </div>
+        ))
       ) : (
         <div className="no-todos mt-16">
           Add some todos, nothing to show right now

@@ -142,39 +142,55 @@ export function AddTodoModal(props) {
       <Dialog open={open}>
         <DialogHeader>Add a Todo</DialogHeader>
         <DialogBody divider>
-          <Input
-            label="Add Title"
-            value={title}
-            onChange={({ target }) => setTitle(target.value)}
-          />
-          <Select
-            value={startTime}
-            label="Select Start Time"
-            onChange={setStartTime}
-          >
-            {slots.map((slot, index) => (
-              <Option key={index} value={slot.startTime}>
-                {slot.startTime}
-              </Option>
-            ))}
-          </Select>
-          <Select value={endTime} label="Select End Time" onChange={setEndTime}>
-            {slots.map((slot, index) => (
-              <Option key={index} value={slot.endTime}>
-                {slot.endTime}
-              </Option>
-            ))}
-          </Select>
+          <div className="my-2">
+            <Input
+              label="Add Title"
+              value={title}
+              onChange={({ target }) => setTitle(target.value)}
+            />
+          </div>
+          <div className="my-2">
+            <Select
+              value={startTime}
+              label="Select Start Time"
+              onChange={setStartTime}
+            >
+              {slots.map((slot, index) => (
+                <Option key={index} value={slot.startTime}>
+                  {slot.startTime}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div className="my-2">
+            <Select
+              value={endTime}
+              label="Select End Time"
+              onChange={setEndTime}
+            >
+              {slots.map((slot, index) => (
+                <Option key={index} value={slot.endTime}>
+                  {slot.endTime}
+                </Option>
+              ))}
+            </Select>
+          </div>
           <h2>Add tasks</h2>
-          <div>
+          <div className="task-container">
             {tasks.map((entry, index) => (
-              <div key={index} className="flex">
+              <div key={index} className="flex my-5">
                 <Input
                   value={entry.text}
                   label="Add Task"
                   onChange={(e) => handleChange(e, index)}
                 />
-                <Button onClick={() => deleteInput(index)}>Delete</Button>
+                <Button
+                  className="mx-4"
+                  color="red"
+                  onClick={() => deleteInput(index)}
+                >
+                  Delete
+                </Button>
               </div>
             ))}
           </div>
@@ -183,7 +199,7 @@ export function AddTodoModal(props) {
               {errorMessage}
             </Alert>
           )}
-          <Button onClick={addEntryClick} className="mt-6">
+          <Button color="blue" onClick={addEntryClick} className="mt-6">
             Add More
           </Button>
         </DialogBody>

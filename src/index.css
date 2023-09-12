@@ -58,9 +58,15 @@ footer {
   border-radius: 4px;
   background-color: rgb(230, 124, 115);
   position: absolute;
+  align-items: flex-start;
 }
 
 .no-todos {
   width: 100%;
   font-size: 30px;
+}
+
+.task-container {
+  max-height: 300px;
+  overflow: scroll;
 }

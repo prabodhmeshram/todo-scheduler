@@ -13,14 +13,14 @@ export default function Header() {
 
   return (
     <Navbar className="mx-auto py-2">
-      <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
-          variant="h2"
-          className="mr-4 self-align cursor-pointer py-1.5 "
-        >
-          Todo Scheduler
-        </Typography>
-        {isLoggedIn && (
+      <div className="container mx-auto flex flex-row items-center justify-between text-blue-gray-900">
+        <div></div>
+        <div className="self-center">
+          <Typography variant="h2" className="mr-4 cursor-pointer py-1.5 ">
+            Todo Scheduler
+          </Typography>
+        </div>
+        {isLoggedIn ? (
           <Button
             variant="gradient"
             size="sm"
@@ -29,6 +29,8 @@ export default function Header() {
           >
             <span>Logout</span>
           </Button>
+        ) : (
+          <div></div>
         )}
       </div>
     </Navbar>

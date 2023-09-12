@@ -56,9 +56,20 @@ function checkIfEndDateLessThanOrEqualToStartDate(startTime, endTime) {
 }
 
 function getTimeSlotString(startTime, endTime) {
-  return `${dayjs(startTime).format("HH:mm")}-${dayjs(endTime).format(
-    "HH:mmA"
-  )}`;
+  const start =
+    dayjs(startTime).format("mm") === "30"
+      ? dayjs(startTime).format("h:mm")
+      : dayjs(startTime).format("h");
+  const end =
+    dayjs(endTime).format("mm") === "30"
+      ? dayjs(endTime).format("h:mmA")
+      : dayjs(endTime).format("hA");
+
+  return `${start} - ${end}`;
+}
+
+function getHour(date) {
+  return dayjs(date).format("h:mmA");
 }
 
 export {
@@ -68,4 +79,5 @@ export {
   checkIfEndDateLessThanOrEqualToStartDate,
   getTaskObj,
   getTimeSlotString,
+  getHour,
 };

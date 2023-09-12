@@ -62,6 +62,7 @@ export default function TodoCard(props) {
                   onChange={() => updateTaskState(task.id, !task.isCompleted)}
                 />
                 <DeleteOutline
+                  className="ml-2 mb-2"
                   onClick={() => deleteTask(task.id)}
                   color="error"
                 ></DeleteOutline>

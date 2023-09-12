@@ -15,7 +15,11 @@ export default function AddTodo() {
   return (
     <div className="add-todo-container flex flex-row-reverse my-8">
       <div className="add-todo mr-12">
-        <Button onClick={openTodoModal} color="blue" className="px-4">
+        <Button
+          onClick={openTodoModal}
+          color="light-blue"
+          className="px-4 text-md"
+        >
           <AddCircleOutlineRoundedIcon fontSize="large" /> Add Todo
         </Button>
         <AddTodoModal></AddTodoModal>
