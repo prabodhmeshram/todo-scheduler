@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   CardBody,
@@ -5,7 +6,7 @@ import {
   Checkbox,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
 import { updateTodo } from "../store/todos";
 
@@ -15,15 +16,22 @@ export default function TodoCard(props) {
 
   const dispatch = useDispatch();
 
-  const checkWhatChanged = (id, isCompleted) => {
-    const updatedTask = tasks.map((task) => {
+  const updateTaskState = (id, isCompleted) => {
+    const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         return { ...task, isCompleted };
       }
       return task;
     });
 
-    dispatch(updateTodo({ ...todo, tasks: updatedTask }));
+    dispatch(updateTodo({ ...todo, tasks: updatedTasks }));
+  };
+
+  const deleteTask = (id) => {
+    const remainingTasks = tasks.filter((task) => {
+      return task.id !== id;
+    });
+    dispatch(updateTodo({ ...todo, tasks: remainingTasks }));
   };
 
   return (
@@ -38,19 +46,28 @@ export default function TodoCard(props) {
         </Typography>
       </CardHeader>
       <CardBody>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-start">
           {tasks.map((task) => (
-            <Checkbox
-              key={task.id}
-              label={
-                <span className={`${task.isCompleted ? "line-through" : ""} `}>
-                  {task.text}
-                </span>
-              }
-              checked={task.isCompleted}
-              ripple={true}
-              onChange={(ev) => checkWhatChanged(task.id, !task.isCompleted)}
-            />
+            <div key={task.id}>
+              <Checkbox
+                label={
+                  <span
+                    className={`${task.isCompleted ? "line-through" : ""} `}
+                  >
+                    {task.text}
+                  </span>
+                }
+                checked={task.isCompleted}
+                ripple={true}
+                onChange={(ev) => updateTaskState(task.id, !task.isCompleted)}
+              />
+              <div className="ml-10 inline">
+                <DeleteIcon
+                  onClick={() => deleteTask(task.id)}
+                  color="error"
+                ></DeleteIcon>
+              </div>
+            </div>
           ))}
         </div>
       </CardBody>
