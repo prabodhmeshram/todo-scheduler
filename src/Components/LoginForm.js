@@ -23,7 +23,7 @@ export default function LoginForm() {
       setError(true);
       return;
     }
-    dispatch(login({ isLoggedIn: true }));
+    dispatch(login({ user: { username } }));
   };
 
   const onUsername = (text) => {

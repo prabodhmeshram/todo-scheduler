@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    value: false,
+    value: Boolean(sessionStorage.getItem("logged-in-user")),
   },
   reducers: {
     login: (state, action) => {
-      sessionStorage.setItem("logged-in-user", action.payload.user);
+      sessionStorage.setItem("logged-in-user", action.payload.user.username);
       state.value = true;
     },
     logout: (state) => {

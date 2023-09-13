@@ -5,14 +5,23 @@ import AddTodo from "../Components/AddTodo";
 import TodoList from "../Components/TodoList";
 import dayjs from "../plugins/dayjs";
 import { Badge, Button } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
-import { selectTodo } from "../store/todos";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTodos, selectFetchStatus, selectTodo } from "../store/todos";
 import { getPendingAndCompleteTasks } from "../utils/todos";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const today = dayjs().format("MMMM D, YYYY");
 
+  const dispatch = useDispatch();
   const todos = useSelector(selectTodo);
+  const todoFetchStatus = useSelector(selectFetchStatus);
+
+  useEffect(() => {
+    if (todoFetchStatus === "idle") {
+      dispatch(fetchTodos());
+    }
+  }, [todoFetchStatus, dispatch]);
 
   const numberOfTodos = todos.length;
   const [pendingTasks, completedTasks] = getPendingAndCompleteTasks(todos);
@@ -36,7 +45,13 @@ export default function Dashboard() {
           </div>
           <AddTodo></AddTodo>
           <TodoContainer className="todo-container"></TodoContainer>
-          <TodoList></TodoList>
+          {todoFetchStatus === "succeeded" ? (
+            <TodoList></TodoList>
+          ) : (
+            <div className="no-todos mt-16">
+              ⏳ Fetching your todos, Hang in there ⏳
+            </div>
+          )}
         </div>
       </div>
       <Footer></Footer>
