@@ -34,6 +34,7 @@ Deployed Version can be found here: https://todo-scheduler.pages.dev/
     [x] Authentication Page
     [x] Hook up auth with session storage
     [x] Beautify the application
+    [x] Deployed App on Cloudflare pages
 
 ## Future Upgrades
 
