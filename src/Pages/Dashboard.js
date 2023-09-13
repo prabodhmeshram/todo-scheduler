@@ -4,7 +4,13 @@ import TodoContainer from "../Components/TodoContainer";
 import AddTodo from "../Components/AddTodo";
 import TodoList from "../Components/TodoList";
 import dayjs from "../plugins/dayjs";
-import { Badge, Button, Spinner } from "@material-tailwind/react";
+import {
+  Badge,
+  Button,
+  Spinner,
+  Card,
+  CardBody,
+} from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTodos, selectFetchStatus, selectTodo } from "../store/todos";
 import { getPendingAndCompleteTasks } from "../utils/todos";
@@ -33,6 +39,9 @@ export default function Dashboard() {
         <div className="mt-16">
           <div className="text-3xl text-left ml-10"> {today}</div>
           <div className="flex gap-10 item-center justify-center">
+            <Card>
+              <CardBody></CardBody>
+            </Card>
             <Badge content={numberOfTodos}>
               <Button color="blue">Todos</Button>
             </Badge>

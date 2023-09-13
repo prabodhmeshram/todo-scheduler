@@ -42,7 +42,10 @@ export default function TodoCard(props) {
   return (
     <Card className="mt-6 mx-2 w-96 bg-yellow-100">
       <CardBody>
-        <Typography variant="h5" className="flex mb-2 align-left items-start">
+        <Typography
+          variant="h5"
+          className="flex mb-2 align-left items-start underline"
+        >
           {title}
         </Typography>
         <div className="flex flex-col items-start">
