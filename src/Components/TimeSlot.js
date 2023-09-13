@@ -8,8 +8,8 @@ export default function TimeSlot(props) {
   const { slot } = props;
   const dispatch = useDispatch();
 
-  const onEditTodo = (id) => {
-    dispatch(setEditTodo({ id }));
+  const onEditTodo = (todo) => {
+    dispatch(setEditTodo({ todo }));
     dispatch(openModal({ open: true }));
   };
 
@@ -45,7 +45,7 @@ export default function TimeSlot(props) {
           </div>
           <div className="ml-5 mt-5 my-3 flex flex-row gap-5">
             <Edit
-              onClick={() => onEditTodo(slot.todo.id)}
+              onClick={() => onEditTodo(slot.todo)}
               fontSize="medium"
               className="cursor-pointer"
             ></Edit>

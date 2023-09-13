@@ -10,8 +10,8 @@ export default function TodoList() {
     <div className="my-14 flex flex-row justify-items-start">
       {todos.length > 0 ? (
         todos.map((todo) => (
-          <div>
-            <TodoCard key={todo.id} todo={todo}></TodoCard>
+          <div key={todo.id}>
+            <TodoCard todo={todo}></TodoCard>
           </div>
         ))
       ) : (

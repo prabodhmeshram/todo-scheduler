@@ -16,7 +16,7 @@ export default function Header() {
       <div className="container mx-auto flex flex-row items-center justify-between text-blue-gray-900">
         <div></div>
         <div className="self-center">
-          <Typography variant="h2" className="mr-4  py-1.5 ">
+          <Typography variant="h2" className="mr-4 py-1.5">
             Todo Scheduler
           </Typography>
         </div>

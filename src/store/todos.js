@@ -5,7 +5,7 @@ export const todosSlice = createSlice({
   initialState: {
     value: [],
     isModalOpen: false,
-    editTodoId: "",
+    editTodo: null,
   },
   reducers: {
     addTodo: (state, action) => {
@@ -16,7 +16,7 @@ export const todosSlice = createSlice({
       state.isModalOpen = action.payload.open;
     },
     setEditTodo: (state, action) => {
-      state.editTodoId = action.payload.id;
+      state.editTodo = action.payload.todo;
     },
     updateTodo: (state, action) => {
       state.value = state.value.map((todo) => {
@@ -39,6 +39,6 @@ export const { addTodo, openModal, setEditTodo, updateTodo, deleteTodo } =
 // selectors for todo specific values
 export const selectTodo = (state) => state.todos.value;
 export const selectModalState = (state) => state.todos.isModalOpen;
-export const selectEditTodo = (state) => state.todos.editTodoId;
+export const selectEditTodo = (state) => state.todos.editTodo;
 
 export default todosSlice.reducer;

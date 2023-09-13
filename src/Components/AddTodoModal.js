@@ -31,7 +31,7 @@ import {
 export function AddTodoModal(props) {
   const open = useSelector(selectModalState);
   const existingTodos = useSelector(selectTodo);
-  const editTodoId = useSelector(selectEditTodo);
+  const editTodo = useSelector(selectEditTodo);
 
   const slots = generateSlots();
   const dispatch = useDispatch();
@@ -43,15 +43,14 @@ export function AddTodoModal(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (editTodoId !== "") {
-      const editTodo = existingTodos.find((todo) => todo.id === editTodoId);
+    if (editTodo) {
       const { title, startTime, endTime, tasks } = editTodo;
       setTitle(title);
       setStartTime(startTime);
       setEndTime(endTime);
       setTasks(tasks);
     }
-  }, [editTodoId, existingTodos]);
+  }, [editTodo]);
 
   const addMoreTasks = () => {
     setTasks((oldArray) => [...oldArray, getTaskObj()]);
@@ -76,7 +75,7 @@ export function AddTodoModal(props) {
       startTime,
       endTime,
       existingTodos,
-      editTodoId
+      editTodo ? editTodo.id : null
     );
     if (conflict) {
       setErrorMessage(
@@ -97,14 +96,14 @@ export function AddTodoModal(props) {
       return;
     }
 
-    if (editTodoId !== "") {
+    if (editTodo) {
       dispatch(
         updateTodo({
           title,
           startTime,
           endTime,
           tasks: tasks.filter((task) => task.text !== ""),
-          id: editTodoId,
+          id: editTodo.id,
         })
       );
     } else {
@@ -135,7 +134,7 @@ export function AddTodoModal(props) {
     setStartTime("");
     setEndTime("");
     setErrorMessage("");
-    dispatch(setEditTodo({ id: "" }));
+    dispatch(setEditTodo({ todo: null }));
   };
 
   return (
