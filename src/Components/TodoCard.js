@@ -40,19 +40,21 @@ export default function TodoCard(props) {
   };
 
   return (
-    <Card className="mt-6 w-96">
+    <Card className="mt-6 mx-2 w-96 bg-yellow-100">
       <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2 bg-blue-500">
+        <Typography variant="h5" className="flex mb-2 align-left items-start">
           {title}
         </Typography>
         <div className="flex flex-col items-start">
           {tasks.map((task) => (
             <div key={task.id}>
-              <div className="ml-10">
+              <div>
                 <Checkbox
                   label={
                     <span
-                      className={`${task.isCompleted ? "line-through" : ""} `}
+                      className={`${
+                        task.isCompleted ? "line-through" : ""
+                      } font-bold`}
                     >
                       {task.text}
                     </span>
