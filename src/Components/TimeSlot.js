@@ -38,7 +38,9 @@ export default function TimeSlot(props) {
           style={{ width: `${width}px` }}
           className="todo-item flex flex-col justify-start text-sm"
         >
-          <div className="my-2 text-lg">{truncateTitle(slot.todo.title)}</div>
+          <div className="my-2 text-base font-bold">
+            {truncateTitle(slot.todo.title)}
+          </div>
           <div>{getTimeSlotString(slot.todo.startTime, slot.todo.endTime)}</div>
           <div className="my-4">
             Number of tasks <strong>{slot.todo.tasks.length}</strong>
