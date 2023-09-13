@@ -87,6 +87,11 @@ function getPendingAndCompleteTasks(todos) {
   );
 }
 
+function persistTodaysTodos(todos) {
+  const today = dayjs().date();
+  return todos.filter(({ startTime }) => dayjs(startTime).date() === today);
+}
+
 export {
   mapTodosToSlots,
   checkIfTodoSlotAvailable,
@@ -96,4 +101,5 @@ export {
   getTimeSlotString,
   getHour,
   getPendingAndCompleteTasks,
+  persistTodaysTodos,
 };

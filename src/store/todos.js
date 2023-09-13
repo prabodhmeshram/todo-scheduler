@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { persistTodaysTodos } from "../utils/todos";
 
 export const todosSlice = createSlice({
   name: "todos",
@@ -52,8 +53,11 @@ export const todosSlice = createSlice({
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   const response = localStorage.getItem("todos");
   const data = response ? JSON.parse(response) : [];
+  // Get only today's todo, in case stale todos
+  // present in the memory
+  const filteredTodo = persistTodaysTodos(data);
   return new Promise((resolve) => {
-    setTimeout(() => resolve(data), 2000);
+    setTimeout(() => resolve(filteredTodo), 2000);
   });
 });
 
