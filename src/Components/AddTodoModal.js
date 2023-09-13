@@ -29,18 +29,18 @@ import {
 } from "../utils/todos";
 
 export function AddTodoModal(props) {
+  const [title, setTitle] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [tasks, setTasks] = useState([getTaskObj()]);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const open = useSelector(selectModalState);
   const existingTodos = useSelector(selectTodo);
   const editTodo = useSelector(selectEditTodo);
 
   const slots = generateSlots();
   const dispatch = useDispatch();
-
-  const [title, setTitle] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [tasks, setTasks] = useState([getTaskObj()]);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (editTodo) {

@@ -72,6 +72,21 @@ function getHour(date) {
   return dayjs(date).format("h:mmA");
 }
 
+function getPendingAndCompleteTasks(todos) {
+  return todos.reduce(
+    (accumulator, currentTodo) => {
+      const totalTask = currentTodo.tasks.length;
+      const completed = currentTodo.tasks.filter(
+        (task) => task.isCompleted
+      ).length;
+      const pending = totalTask - completed;
+
+      return [accumulator[0] + pending, accumulator[1] + completed];
+    },
+    [0, 0]
+  );
+}
+
 export {
   mapTodosToSlots,
   checkIfTodoSlotAvailable,
@@ -80,4 +95,5 @@ export {
   getTaskObj,
   getTimeSlotString,
   getHour,
+  getPendingAndCompleteTasks,
 };

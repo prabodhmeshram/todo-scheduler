@@ -7,6 +7,7 @@ import dayjs from "../plugins/dayjs";
 import { Badge, Button } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { selectTodo } from "../store/todos";
+import { getPendingAndCompleteTasks } from "../utils/todos";
 
 export default function Dashboard() {
   const today = dayjs().format("MMMM D, YYYY");
@@ -14,19 +15,7 @@ export default function Dashboard() {
   const todos = useSelector(selectTodo);
 
   const numberOfTodos = todos.length;
-
-  const [pendingTasks, completedTasks] = todos.reduce(
-    (accumulator, currentTodo) => {
-      const totalTask = currentTodo.tasks.length;
-      const completed = currentTodo.tasks.filter(
-        (task) => task.isCompleted
-      ).length;
-      const pending = totalTask - completed;
-
-      return [accumulator[0] + pending, accumulator[1] + completed];
-    },
-    [0, 0]
-  );
+  const [pendingTasks, completedTasks] = getPendingAndCompleteTasks(todos);
 
   return (
     <div>
