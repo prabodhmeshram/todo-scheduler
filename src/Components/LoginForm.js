@@ -67,10 +67,10 @@ export default function LoginForm() {
               Enter valid credentials
             </Alert>
           )}
+          <Button color="light-blue" className="mt-4" onClick={() => logMeIn()}>
+            Login
+          </Button>
         </CardBody>
-        <Button color="light-blue" onClick={() => logMeIn()}>
-          Login
-        </Button>
       </Card>
     </div>
   );

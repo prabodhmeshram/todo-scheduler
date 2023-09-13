@@ -4,7 +4,7 @@ import TodoContainer from "../Components/TodoContainer";
 import AddTodo from "../Components/AddTodo";
 import TodoList from "../Components/TodoList";
 import dayjs from "../plugins/dayjs";
-import { Badge, Button } from "@material-tailwind/react";
+import { Badge, Button, Spinner } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTodos, selectFetchStatus, selectTodo } from "../store/todos";
 import { getPendingAndCompleteTasks } from "../utils/todos";
@@ -48,8 +48,9 @@ export default function Dashboard() {
           {todoFetchStatus === "succeeded" ? (
             <TodoList></TodoList>
           ) : (
-            <div className="no-todos mt-16">
+            <div className="flex no-todos justify-center mt-16">
               ⏳ Fetching your todos, Hang in there ⏳
+              <Spinner className="ml-6 h-12 w-12" />
             </div>
           )}
         </div>
