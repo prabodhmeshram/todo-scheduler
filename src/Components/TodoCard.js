@@ -40,7 +40,7 @@ export default function TodoCard(props) {
   };
 
   return (
-    <Card className="mt-6 mx-2 w-96 bg-yellow-100">
+    <Card className="mt-6 mx-2 w-96 bg-blue-100">
       <CardBody>
         <Typography
           variant="h5"

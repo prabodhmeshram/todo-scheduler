@@ -32,6 +32,7 @@ Deployed Version can be found here: https://todo-scheduler.pages.dev/
     [x] Delete Task from card layout
     [x] Delete Todo
     [x] Authentication Page
+    [x] Persist todos in localStorage
     [x] Hook up auth with session storage
     [x] Beautify the application
     [x] Deployed App on Cloudflare pages

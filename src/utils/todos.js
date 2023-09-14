@@ -23,20 +23,22 @@ function checkIfTodoSlotAvailable(startTime, endTime, existingTodos, skipId) {
     filterTodos = filterTodos.filter((todo) => todo.id !== skipId);
   }
 
-  return filterTodos.find((todo) => {
-    let c1s = dayjs(startTime);
-    let c2s = dayjs(todo.startTime);
-    let c1e = dayjs(endTime);
-    let c2e = dayjs(todo.endTime);
+  const conflictedTodo = filterTodos.find((todo) => {
+    let cStartTime = dayjs(startTime);
+    let existingStartTime = dayjs(todo.startTime);
+    let cEndTime = dayjs(endTime);
+    let existingEndTime = dayjs(todo.endTime);
 
     // Condition that tells if there is conflict
     // Either the schedule overlap from start or from behind
     return (
-      (c1s < c2s && c1e > c2s) ||
-      (c1s > c2s && c1s < c2e) ||
-      (c1s <= c2s && c1e >= c2e)
+      (cStartTime < existingStartTime && cEndTime > existingStartTime) ||
+      (cStartTime > existingStartTime && cStartTime < existingEndTime) ||
+      (cStartTime <= existingStartTime && cEndTime >= existingEndTime)
     );
   });
+
+  return conflictedTodo ? false : true;
 }
 
 function getTaskObj() {
