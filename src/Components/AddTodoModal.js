@@ -35,7 +35,7 @@ export function AddTodoModal(props) {
   const [tasks, setTasks] = useState([getTaskObj()]);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const open = useSelector(selectModalState);
+  const isModalOpen = useSelector(selectModalState);
   const existingTodos = useSelector(selectTodo);
   const editTodo = useSelector(selectEditTodo);
 
@@ -139,7 +139,7 @@ export function AddTodoModal(props) {
 
   return (
     <>
-      <Dialog open={open}>
+      <Dialog open={isModalOpen}>
         <DialogHeader>Add a Todo</DialogHeader>
         <DialogBody divider>
           <div className="my-2">
