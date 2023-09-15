@@ -38,7 +38,7 @@ function checkIfTodoSlotAvailable(startTime, endTime, existingTodos, skipId) {
     );
   });
 
-  return conflictedTodo ? false : true;
+  return conflictedTodo ? true : false;
 }
 
 function getTaskObj() {

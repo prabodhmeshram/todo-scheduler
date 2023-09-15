@@ -30,7 +30,7 @@ describe("mapTodosToSlots", () => {
 });
 
 describe("checkIfTodoSlotAvailable", () => {
-  it("should return true when no conflicts exist", () => {
+  it("should return false when no conflicts exist", () => {
     const existingTodos = [
       {
         id: "task-1",
@@ -54,10 +54,10 @@ describe("checkIfTodoSlotAvailable", () => {
       skipId
     );
 
-    expect(result).toBe(true);
+    expect(result).toBe(false);
   });
 
-  it("should return true when skipId matches the conflicting todo", () => {
+  it("should return false when skipId matches the conflicting todo", () => {
     const existingTodos = [
       {
         id: "task-1",
@@ -76,10 +76,10 @@ describe("checkIfTodoSlotAvailable", () => {
       skipId
     );
 
-    expect(result).toBe(true);
+    expect(result).toBe(false);
   });
 
-  it("should return false when there is a conflict", () => {
+  it("should return true when there is a conflict", () => {
     const existingTodos = [
       {
         id: "task-1",
@@ -98,7 +98,7 @@ describe("checkIfTodoSlotAvailable", () => {
       skipId
     );
 
-    expect(result).toBe(false);
+    expect(result).toBe(true);
   });
 });
 
